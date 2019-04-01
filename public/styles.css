@@ -1,5 +1,4 @@
 body {
-  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   background: #fff;
   padding: 0px;
@@ -7,7 +6,7 @@ body {
 }
 
 div.addComment h3 {
-	color: brown;
+	color: purple;
 	font-family: 'Garamond','Edwardian Script ITC', 'Javanese Text', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, 'Century Schoolbook';
 }
 
@@ -24,7 +23,7 @@ p.WelcomeMessage {
 }
 
 p.Title {
-    color: brown;
+    color: purple;
     font-family: 'Garamond', 'Brush Script MT', 'Javanese Text', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
     text-align: center;
     height: 100%;
@@ -60,7 +59,7 @@ p.Title {
 }
 
 .footer a {
-  color: brown;
+  color: purple;
 	margin-right: 50px;
 }
 
