@@ -6,6 +6,24 @@ body {
   margin: 0px;
 }
 
+p {
+	color: black;
+	text-align: center;
+	width: 100%;
+        font-size: 2em;
+	font-weight: 100;
+}
+
+p.Title {
+    color: black;
+    font-family: 'Garamond', 'Brush Script MT', 'Javanese Text', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    font-size: 8em;
+    font-weight: 300;    
+}
+
 /* Header */
 .header {
   display: flex;
