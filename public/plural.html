@@ -41,8 +41,8 @@
 		<div v-if="comments.length > 0">
 			<h3>Comments</h3>
 			<div v-for="comment in comments">
-				<div v-if="comment.edit">
-					<input v-model="authorEdit" placeholder="Name"></p>
+				<div v-if="checkEdit(comment)">
+					<input v-model="authorEdit"></p>
 					<textarea v-model="commentEdit"></textarea>
 					<br />
 					<button v-on:click="editComment(comment)">Save</button>
@@ -52,7 +52,7 @@
 					<hr>
 					<p>{{comment.comment}}</p>
 					<p><i>-- {{comment.author}}</i></p>
-					<button v-on:click="editMode(comment)">Edit</button>
+					<button v-on:click="setEdit(comment)">Edit</button>
 					<button v-on:click="deleteComment(comment)">Delete</button>
 				</div>
 			</div>
