@@ -3,7 +3,10 @@ var app = new Vue({
   data: {
 		author: '',
 		comment: '',
-		comments: []	
+		comments: [],
+		authorEdit: '',
+		commentEdit: '',
+		idEdit: ''
 	},
 	created() {
 		this.getComments();
@@ -13,6 +16,9 @@ var app = new Vue({
 			try {
 				let response = await axios.get("/api/eternal_comments");
 				this.comments = response.data;
+				this.idEdit = '';
+				this.authorEdit = '';
+				this.commentEdit = '';
 				return true;
 			} catch (error) {
 				console.log(error);
@@ -29,9 +35,9 @@ var app = new Vue({
 		},
 		async editComment(comment) {
 			try {
-				let response = await axios.put("/api/eternal_comments/" + comment._id, {
-					author: this.editingComment.author,
-					comment: this.editingComment.comment	
+				let response = axios.put("/api/eternal_comments/" + comment._id, {
+					author: this.authorEdit,
+					comment: this.commentEdit	
 				});
 				this.getComments();
 				return true;
@@ -40,10 +46,6 @@ var app = new Vue({
 			}
 		},
 		async upload() {
-			this.comments.push({
-				author: this.author,
-				comment: this.comment
-			});
 			try {
 				const formData = new FormData();
 				let response = await axios.post('/api/eternal_comments', {
@@ -55,6 +57,17 @@ var app = new Vue({
 			} catch (error) {
 				console.log(error);
 			}
+		},
+		checkEdit(comment) {
+			if (comment._id === this.idEdit) {
+				return true;
+			}
+		},
+		setEdit(comment) {
+			this.idEdit = comment._id;
+			this.authorEdit = comment.author;
+			this.commentEdit = comment.comment;
 		}
 	}
 });
+
