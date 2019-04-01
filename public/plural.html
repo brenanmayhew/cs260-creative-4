@@ -20,15 +20,42 @@
 				<a class="navbar-brand" href="/index.html">LDS Marriage</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="/index.html">Home</a></li>
+				<li><a href="/index.html">Home</a></li>
 				<li><a href="/eternal.html">Eternal Marriage</a></li>
-				<li><a href="/plural.html">Plural Marriage</a></li>
+				<li class="active"><a href="/plural.html">Plural Marriage</a></li>
 			</ul>
 		</div>
 	</nav>
-  <div class="content">
+  <div id="app" class="content">
 		<div>
 			<p>description</p>
+		</div>
+
+		<h3>Add a Comment</h3>
+		<form v-on:submit.prevent="upload">
+			<input v-model="author" placeholder="Name"></p>
+			<textarea v-model="comment"></textarea>
+			<br />
+			<button type="submit">Comment</button>
+		</form>
+		<div v-if="comments.length > 0">
+			<h3>Comments</h3>
+			<div v-for="comment in comments">
+				<div v-if="comment.edit">
+					<input v-model="authorEdit" placeholder="Name"></p>
+					<textarea v-model="commentEdit"></textarea>
+					<br />
+					<button v-on:click="editComment(comment)">Save</button>
+					<button v-on:click="deleteComment(comment)">Delete</button>
+				</div>
+				<div v-else>
+					<hr>
+					<p>{{comment.comment}}</p>
+					<p><i>-- {{comment.author}}</i></p>
+					<button v-on:click="editMode(comment)">Edit</button>
+					<button v-on:click="deleteComment(comment)">Delete</button>
+				</div>
+			</div>
 		</div>
 	</div>
   <div class="footer">
@@ -36,6 +63,7 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.7/vue.js" integrity="sha256-g+Q8DFAmG5+eyRPSydX0LY4TfjsL11XSDrIGerbbEdA=" crossorigin="anonymous"></script>
+  <script src="/plural.js"></script>
 </body>
 
 </html>
