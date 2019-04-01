@@ -5,7 +5,8 @@ var app = new Vue({
 		comment: '',
 		comments: [],
 		authorEdit: '',
-		commentEdit: ''
+		commentEdit: '',
+		idEdit: ''
 	},
 	created() {
 		this.getComments();
@@ -15,6 +16,9 @@ var app = new Vue({
 			try {
 				let response = await axios.get("/api/plural_comments");
 				this.comments = response.data;
+				this.idEdit = '';
+				this.authorEdit = '';
+				this.commentEdit = '';
 				return true;
 			} catch (error) {
 				console.log(error);
@@ -31,12 +35,11 @@ var app = new Vue({
 		},
 		async editComment(comment) {
 			try {
-				let response = await axios.put("/api/plural_comments/" + comment._id, {
-					author: this.editingComment.author,
-					comment: this.editingComment.comment	
+				let response = axios.put("/api/plural_comments/" + comment._id, {
+					author: this.authorEdit,
+					comment: this.commentEdit	
 				});
 				this.getComments();
-				this.editMode(comment);
 				return true;
 			} catch (error) {
 				console.log(error);
@@ -55,15 +58,15 @@ var app = new Vue({
 				console.log(error);
 			}
 		},
-		editMode(comment) {
-			for (c in this.comments) {
-				if (c._id === comment._id) {
-					c.edit = !c.edit;
-				} else {
-					c.edit = false;
-				}
+		checkEdit(comment) {
+			if (comment._id === this.idEdit) {
+				return true;
 			}
-			console.log("here");
+		},
+		setEdit(comment) {
+			this.idEdit = comment._id;
+			this.authorEdit = comment.author;
+			this.commentEdit = comment.comment;
 		}
 	}
 });
