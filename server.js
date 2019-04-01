@@ -71,6 +71,7 @@ app.put('/api/eternal_comments/:id', async (req, res) => {
 		comment.author = req.body.author;
 		comment.comment = req.body.comment;
 		await comment.save();
+		res.send(comment);
 	} catch (error) {
 		console.log(error);
 		res.sendStatus(500);
@@ -124,6 +125,7 @@ app.put('/api/plural_comments/:id', async (req, res) => {
 		comment.author = req.body.author;
 		comment.comment = req.body.comment;
 		await comment.save();
+		res.send(comment);
 	} catch (error) {
 		console.log(error);
 		res.sendStatus(500);
