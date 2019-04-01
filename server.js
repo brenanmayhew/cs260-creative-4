@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
 
 const app = express();
 app.use(bodyParser.json());
@@ -9,21 +9,10 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static('public'));
 
-
-// Configure multer so that it will upload to '/public/images'
-const multer = require('multer');
-const upload = multer({
-	dest: './public/images/',
-	limits: {
-		fileSize: 10000000
-	}
-});
-
-
 const mongoose = require('mongoose');
 
 // connect to the database
-mongoose.connect('mongodb://localhost:27017/museum', {
+mongoose.connect('mongodb://localhost:27017/marriage', {
   useNewUrlParser: true
 });
 
@@ -31,38 +20,23 @@ app.listen(3000, () => console.log('Server listening on port 3000!'));
 
 
 // Create a scheme for items in the museum: a title and a path to an image.
-const itemSchema = new mongoose.Schema({
-	title: String,
-	description: String,
-	path: String
+const commentSchema = new mongoose.Schema({
+	author: String,
+	comment: String
 });
 
-// Create a model for items in the museum.
-const Item = mongoose.model('Item', itemSchema);
-
-
-// Upload a photo. Uses the multer middleware for the upload and then returns
-// the path where the photo is stored in the file system.
-app.post('/api/photos', upload.single('photo'), async (req, res) => {
-	// Just a safety check
-	if (!req.file) {
-		return res.sendStatus(400);
-	}
-	res.send({
-		path: "/images/" + req.file.filename
-	});
-});
+// Create model for comments for the eternal page.
+const EternalComment = mongoose.model('eternal_comment', commentSchema);
 
 // Create a new item in the museum: takes a title and a path to an image.
-app.post('/api/items', async (req, res) => {
-	const item = new Item({
-		title: req.body.title,
-		description: req.body.description,
-		path: req.body.path
+app.post('/api/eternal_comments', async (req, res) => {
+	const comment = new EternalComment({
+		author: req.body.author,
+		comment: req.body.comment
 	});
 	try {
-		await item.save();
-		res.send(item);
+		await comment.save();
+		res.send(comment);
 	} catch (error) {
 		console.log(error);
 		res.sendStatus(500);
@@ -70,10 +44,10 @@ app.post('/api/items', async (req, res) => {
 });
 
 // Get a list of all of the items in the museum.
-app.get('/api/items', async (req, res) => {
+app.get('/api/eternal_comments', async (req, res) => {
 	try {
-		let items = await Item.find();
-		res.send(items);
+		let comments = await EternalComment.find();
+		res.send(comments);
 	} catch (error) {
 		console.log(error);
 		res.sendStatus(500);
@@ -81,9 +55,9 @@ app.get('/api/items', async (req, res) => {
 });
 
 // Delete an item in the museum: takes an id.
-app.delete('/api/items/:id', async (req, res) => {
+app.delete('/api/eternal_comments/:id', async (req, res) => {
 	try {
-		await Item.deleteOne({ _id: req.param("id") });
+		await EternalComment.deleteOne({ _id: req.param("id") });
 	} catch (error) {
 		console.log(error);
 		res.sendStatus(500);
@@ -91,12 +65,12 @@ app.delete('/api/items/:id', async (req, res) => {
 });
 
 // Edit an item in the museum: takes an id.
-app.put('/api/items/:id', async (req, res) => {
+app.put('/api/eternal_comments/:id', async (req, res) => {
 	try {
-		let item = await Item.findOne({ _id: req.param("id") });
-		item.title = req.body.title;
-		item.description = req.body.description;
-		await item.save();
+		let comment = await EternalComment.findOne({ _id: req.param("id") });
+		comment.author = req.body.author;
+		comment.comment = req.body.comment;
+		await comment.save();
 	} catch (error) {
 		console.log(error);
 		res.sendStatus(500);
@@ -104,5 +78,55 @@ app.put('/api/items/:id', async (req, res) => {
 });
 
 
+// Create model for comments for the plural page.
+const PluralComment = mongoose.model('plural_comment', commentSchema);
 
+// Create a new item in the museum: takes a title and a path to an image.
+app.post('/api/plural_comments', async (req, res) => {
+	const comment = new PluralComment({
+		author: req.body.author,
+		comment: req.body.comment
+	});
+	try {
+		await comment.save();
+		res.send(comment);
+	} catch (error) {
+		console.log(error);
+		res.sendStatus(500);
+	}
+});
+
+// Get a list of all of the items in the museum.
+app.get('/api/plural_comments', async (req, res) => {
+	try {
+		let comments = await PluralComment.find();
+		res.send(comments);
+	} catch (error) {
+		console.log(error);
+		res.sendStatus(500);
+	}
+});
+
+// Delete an item in the museum: takes an id.
+app.delete('/api/plural_comments/:id', async (req, res) => {
+	try {
+		await PluralComment.deleteOne({ _id: req.param("id") });
+	} catch (error) {
+		console.log(error);
+		res.sendStatus(500);
+	}
+});
+
+// Edit an item in the museum: takes an id.
+app.put('/api/plural_comments/:id', async (req, res) => {
+	try {
+		let comment = await PluralComment.findOne({ _id: req.param("id") });
+		comment.author = req.body.author;
+		comment.comment = req.body.comment;
+		await comment.save();
+	} catch (error) {
+		console.log(error);
+		res.sendStatus(500);
+	}
+});
 
