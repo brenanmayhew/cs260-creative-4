@@ -35,7 +35,7 @@ var app = new Vue({
 		},
 		async editComment(comment) {
 			try {
-				let response = axios.put("/api/plural_comments/" + comment._id, {
+				let response = await axios.put("/api/plural_comments/" + comment._id, {
 					author: this.authorEdit,
 					comment: this.commentEdit	
 				});
