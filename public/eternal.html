@@ -10,7 +10,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<!-- Latest compiled JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <title>Museum of Ordinary Objects</title>
+  <title>LDS Marriage</title>
 </head>
 
 <body>
@@ -31,32 +31,47 @@
 			<p>description</p>
 		</div>
 
-		<h3>Add a Comment</h3>
-		<form v-on:submit.prevent="upload">
-			<input v-model="author" placeholder="Name"></p>
-			<textarea v-model="comment"></textarea>
-			<br />
-			<button type="submit">Comment</button>
-		</form>
+		<div class="addComment">
+			<h3>Add a Comment</h3>
+			<form v-on:submit.prevent="upload">
+				<input v-model="author" placeholder="Name"></p>
+				<textarea v-model="comment"></textarea>
+				<br />
+				<button class="btn" type="submit">Comment</button>
+			</form>
+		</div>
 		<div v-if="comments.length > 0">
 			<h3>Comments</h3>
 			<div v-for="comment in comments">
 				<div v-if="checkEdit(comment)">
-					<input v-model="authorEdit"></p>
-					<textarea v-model="commentEdit"></textarea>
-					<br />
-					<button v-on:click="editComment(comment)">Save</button>
-					<button v-on:click="deleteComment(comment)">Delete</button>
+					<hr>
+					<div class="row">
+						<div class="col-sm-3">
+							<input v-model="authorEdit"></p>
+							<textarea v-model="commentEdit"></textarea>
+						</div>
+						<div class="col-sm-3">
+							<button class="btn btn-success" v-on:click="editComment(comment)">Save</button>
+							<button class="btn btn-danger" v-on:click="deleteComment(comment)">Delete</button>
+						</div>
+					</div>
 				</div>
 				<div v-else>
 					<hr>
-					<p>{{comment.comment}}</p>
-					<p><i>-- {{comment.author}}</i></p>
-					<button v-on:click="setEdit(comment)">Edit</button>
-					<button v-on:click="deleteComment(comment)">Delete</button>
+					<div class="row">
+						<div class="col-sm-3">
+							<p>{{comment.comment}}</p>
+							<p><i>-- {{comment.author}}</i></p>
+						</div>
+						<div class="col-sm-3">
+							<button class="btn btn-primary" v-on:click="setEdit(comment)">Edit</button>
+							<button class="btn btn-danger" v-on:click="deleteComment(comment)">Delete</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+
 	</div>
   <div class="footer">
 		<a href="https://github.com/brenanmayhew/cs260-creative-4" target="_blank">My Github</a>
