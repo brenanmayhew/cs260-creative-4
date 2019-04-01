@@ -14,7 +14,7 @@ p {
 	color: black;
 	text-align: left;
 	width: 100%;
-        font-size: 1.2em;
+	font-size: 1.2em;
 	font-weight: 100;
 }
 
@@ -23,13 +23,13 @@ p.WelcomeMessage {
 }
 
 p.Title {
-    color: purple;
-    font-family: 'Garamond', 'Brush Script MT', 'Javanese Text', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
-    text-align: center;
-    height: 100%;
-    width: 100%;
-    font-size: 7em;
-    font-weight: 300;    
+	color: purple;
+	font-family: 'Garamond', 'Brush Script MT', 'Javanese Text', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+	text-align: center;
+	height: 100%;
+	width: 100%;
+	font-size: 7em;
+	font-weight: 300;    
 }
 
 /* Header */
@@ -46,16 +46,16 @@ p.Title {
 
 /* Footer */
 .footer {
-  position: fixed;
-    left: 0;
-      bottom: 0;
-        width: 100%;
-	  background-color: #f3f3f3;
-	    text-align: center;
-	      font-family: 'Edwardian Script ITC', 'Garamond', 'Javanese Text', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, 'Century Schoolbook';
-	        font-size: 2em;
-		  font-weight: 300;
-		    opacity: .90;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: #f3f3f3;
+	text-align: center;
+	font-family: 'Edwardian Script ITC', 'Garamond', 'Javanese Text', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif, 'Century Schoolbook';
+	font-size: 2em;
+	font-weight: 300;
+	opacity: .90;
 }
 
 .footer a {
