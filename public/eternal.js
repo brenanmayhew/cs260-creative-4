@@ -27,7 +27,7 @@ var app = new Vue({
 		async deleteComment(comment) {
 			try {
 				let response = axios.delete("/api/eternal_comments/" + comment._id);
-				this.getComments();
+				await this.getComments();
 				return true;
 			} catch (error) {
 				console.log(error);
@@ -39,7 +39,7 @@ var app = new Vue({
 					author: this.authorEdit,
 					comment: this.commentEdit	
 				});
-				this.getComments();
+				await this.getComments();
 				return true;
 			} catch (error) {
 				console.log(error);
